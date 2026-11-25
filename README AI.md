@@ -54,6 +54,6 @@ git init
 git add .
 git commit -m "Initial commit: readyforjava"
 git branch -M main
-git remote add origin https://github.com/<you>/readyforjava.git
+git remote add origin https://github.com/mohamedmbarke/
 git push -u origin main
 ```
