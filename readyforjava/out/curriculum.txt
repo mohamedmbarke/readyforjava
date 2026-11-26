@@ -1,0 +1,262 @@
+## readyforjava curriculum. Format documented in README.md. Fields separated by " @@ ".
+
+@TOPIC basics @@ Program Basics
+@EXPLAIN
+Every Java program lives inside a class, and execution starts at the main method.
+Statements end with a semicolon; blocks are wrapped in curly braces.
+
+    public class Hello {
+        public static void main(String[] args) {
+            System.out.println("Hello, world!"); // prints and moves to a new line
+            System.out.print("no newline");
+        }
+    }
+
+println adds a newline after the text; print does not.
+@LINK Oracle: Your first Java application @@ https://docs.oracle.com/javase/tutorial/getStarted/application/index.html @@ docs
+@LINK dev.java: Learn Java @@ https://dev.java/learn/ @@ docs
+@LINK W3Schools: Java Intro @@ https://www.w3schools.com/java/java_intro.asp @@ site
+@LINK Programming with Mosh: Java Tutorial for Beginners @@ https://www.youtube.com/watch?v=eIrMbAQSU34 @@ video
+@LINK Bro Code: Java Full Course @@ https://www.youtube.com/watch?v=xk4_1vDrzzo @@ video
+@LINK University of Helsinki: Java Programming MOOC @@ https://java-programming.mooc.fi/ @@ site
+@LINK Programiz: Learn Java @@ https://www.programiz.com/java-programming @@ site
+@LINK YouTube: search "Program Basics" tutorials @@ https://www.youtube.com/results?search_query=java+program+basics+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Hello, world @@ Print exactly: Hello, readyforjava! @@ Hello, readyforjava! @@ public class Main {\n    public static void main(String[] args) {\n        // print: Hello, readyforjava!\n    }\n}
+@EX short @@ Which method is the entry point of every Java application? (name only) @@  @@ main @@ It is public static void ___(String[] args).
+@EX choice @@ Which statement prints a line of text? @@ A) System.out.println("Hi");;B) print("Hi");;C) console.log("Hi");;D) echo "Hi"; @@ a @@ Java uses System.out.
+@EX short @@ How many lines of output does this produce? (number)\nSystem.out.print("A");\nSystem.out.println("B");\nSystem.out.println("C"); @@  @@ 2 @@ Only println ends a line.
+
+@TOPIC variables @@ Variables and Data Types
+@EXPLAIN
+A variable has a type, a name and a value. Java has 8 primitive types; the common ones are
+int, long, double, boolean and char. String is a class (a reference type).
+
+    int age = 20;
+    double price = 9.99;
+    boolean ready = true;
+    char grade = 'A';
+    String name = "Ada";
+    final int MAX = 100; // constant: cannot be reassigned
+
+Dividing two ints performs integer division and drops the remainder.
+@LINK Oracle: Variables @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html @@ docs
+@LINK Oracle: Primitive data types @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html @@ docs
+@LINK W3Schools: Java Variables @@ https://www.w3schools.com/java/java_variables.asp @@ site
+@LINK YouTube: search "Variables and Data Types" tutorials @@ https://www.youtube.com/results?search_query=java+variables+data+types+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Add two numbers @@ Using a and b, print: Sum: 42 (calculate the sum, don't hard-code it). @@ Sum: 42 @@ public class Main {\n    public static void main(String[] args) {\n        int a = 12;\n        int b = 30;\n        // print: Sum: 42\n    }\n}
+@EX short @@ What does the expression 7 / 2 evaluate to in Java? @@  @@ 3 @@ Both operands are int, so the result is an int.
+@EX choice @@ Which of these is NOT a primitive type? @@ A) int;;B) boolean;;C) String;;D) double @@ c @@ It starts with a capital letter.
+@EX short @@ Which keyword makes a variable a constant? @@  @@ final @@ Five letters, also used for classes that cannot be extended.
+
+@TOPIC operators @@ Operators and Expressions
+@EXPLAIN
+Arithmetic: + - * / %   (% is the remainder)
+Comparison: == != < > <= >=   Logical: && (and), || (or), ! (not)
+Shortcuts: x += 3 means x = x + 3, and x++ adds one.
+
+    int r = 17 % 5;          // 2
+    boolean ok = (5 > 3) && (2 > 4); // false
+@LINK Oracle: Operators @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html @@ docs
+@LINK W3Schools: Java Operators @@ https://www.w3schools.com/java/java_operators.asp @@ site
+@LINK YouTube: search "Operators and Expressions" tutorials @@ https://www.youtube.com/results?search_query=java+operators+expressions+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@EX short @@ What is 17 % 5? @@  @@ 2 @@ 17 = 3 * 5 + remainder.
+@EX short @@ What does (5 > 3 && 2 > 4) evaluate to? (true/false) @@  @@ false @@ && needs both sides to be true.
+@EX short @@ What is x after running this code? (number)\nint x = 5;\nx += 3;\nx++; @@  @@ 9 @@ 5, then 8, then one more.
+
+@TOPIC conditionals @@ Conditionals
+@EXPLAIN
+Use if / else if / else to choose between paths, and switch to select on a single value.
+
+    if (score >= 90) {
+        System.out.println("A");
+    } else if (score >= 80) {
+        System.out.println("B");
+    } else {
+        System.out.println("C");
+    }
+
+    switch (day) {
+        case 1: System.out.println("Mon"); break;
+        default: System.out.println("Other");
+    }
+
+Compare Strings with equals(), never ==. Without break, a switch falls through to the next case.
+@LINK Oracle: The if-then statement @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/if.html @@ docs
+@LINK Oracle: The switch statement @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html @@ docs
+@LINK W3Schools: Java Conditions @@ https://www.w3schools.com/java/java_conditions.asp @@ site
+@LINK YouTube: search "Conditionals" tutorials @@ https://www.youtube.com/results?search_query=java+conditionals+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Odd or even @@ Print odd or even depending on n. @@ odd @@ public class Main {\n    public static void main(String[] args) {\n        int n = 7;\n        // print odd or even\n    }\n}
+@EX choice @@ Which correctly compares the contents of two Strings a and b? @@ A) a == b;;B) a.equals(b);;C) a = b;;D) a.compare(b) @@ b @@ It is a method of String.
+@EX short @@ What is printed? (one letter)\nint n = 15;\nif (n > 10) System.out.println("A");\nelse if (n > 5) System.out.println("B");\nelse System.out.println("C"); @@  @@ A @@ Only the first true branch runs.
+@EX short @@ Which keyword prevents a switch case from falling through? @@  @@ break @@ It also exits loops.
+
+@TOPIC loops @@ Loops
+@EXPLAIN
+for repeats a known number of times, while repeats while a condition holds, and do-while
+always runs its body at least once. The enhanced for loop walks through arrays and collections.
+
+    for (int i = 0; i < 4; i++) { System.out.println(i); }
+    int n = 3;
+    while (n > 0) { n--; }
+    do { n++; } while (n < 3);
+    for (int v : numbers) { System.out.println(v); }
+@LINK Oracle: The for statement @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html @@ docs
+@LINK Oracle: while and do-while @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/while.html @@ docs
+@LINK W3Schools: Java For Loop @@ https://www.w3schools.com/java/java_for_loop.asp @@ site
+@LINK YouTube: search "Loops" tutorials @@ https://www.youtube.com/results?search_query=java+loops+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Count to five @@ Print the numbers 1 to 5, one per line. @@ 1\n2\n3\n4\n5 @@ public class Main {\n    public static void main(String[] args) {\n        // use a for loop\n    }\n}
+@EX short @@ How many times does this body run? (number)\nfor (int i = 0; i < 4; i++) { ... } @@  @@ 4 @@ i takes the values 0, 1, 2, 3.
+@EX short @@ What is s at the end? (number)\nint s = 0;\nfor (int i = 1; i <= 4; i++) { s += i; } @@  @@ 10 @@ 1+2+3+4.
+@EX choice @@ Which loop always runs its body at least once? @@ A) for;;B) while;;C) do-while;;D) for-each @@ c @@ The condition is checked after the body.
+
+@TOPIC strings @@ Strings
+@EXPLAIN
+Strings are immutable objects. Indexes start at 0.
+
+    String s = "hello";
+    s.length();        // 5
+    s.charAt(1);       // 'e'
+    s.substring(1, 3); // "el" (end index is exclusive)
+    s.toUpperCase();   // "HELLO"
+    s.indexOf("l");    // 2
+    s.equals("hello"); // true
+@LINK Oracle: Strings @@ https://docs.oracle.com/javase/tutorial/java/data/strings.html @@ docs
+@LINK W3Schools: Java Strings @@ https://www.w3schools.com/java/java_strings.asp @@ site
+@LINK YouTube: search "Strings" tutorials @@ https://www.youtube.com/results?search_query=java+strings+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Reverse a word @@ Print the String s reversed. @@ avaj @@ public class Main {\n    public static void main(String[] args) {\n        String s = \"java\";\n        // print it reversed\n    }\n}
+@EX short @@ What does "hello".length() return? @@  @@ 5 @@ Count the letters.
+@EX short @@ What does "Java".charAt(1) return? (one character) @@  @@ a @@ Index 0 is 'J'.
+@EX short @@ What does "hello".substring(1, 3) return? @@  @@ el @@ Start index is inclusive, end index is exclusive.
+
+@TOPIC arrays @@ Arrays
+@EXPLAIN
+An array holds a fixed number of values of the same type. Elements are zero-indexed and start
+with default values (0, false or null).
+
+    int[] a = new int[5];
+    int[] b = {4, 8, 15};
+    a[0] = 7;
+    System.out.println(b.length); // 3 (a field, no parentheses)
+@LINK Oracle: Arrays @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html @@ docs
+@LINK W3Schools: Java Arrays @@ https://www.w3schools.com/java/java_arrays.asp @@ site
+@LINK YouTube: search "Arrays" tutorials @@ https://www.youtube.com/results?search_query=java+arrays+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Sum an array @@ Print the sum of all numbers in the array. @@ 24 @@ public class Main {\n    public static void main(String[] args) {\n        int[] nums = {3, 5, 7, 9};\n        // loop and add\n    }\n}
+@EX short @@ For int[] a = new int[5], what is the last valid index? @@  @@ 4 @@ Indexes run from 0 to length - 1.
+@EX short @@ What is the default value of each element in new int[3]? @@  @@ 0 @@ Numeric arrays start filled with zeros.
+@EX short @@ Which property (no parentheses) gives the size of an array? @@  @@ length @@ Strings use length(), arrays do not.
+
+@TOPIC methods @@ Methods
+@EXPLAIN
+A method groups reusable code. It declares a return type, a name and parameters.
+
+    static int square(int n) {
+        return n * n;
+    }
+    static void greet(String name) {
+        System.out.println("Hi " + name);
+    }
+
+void means nothing is returned. Overloading means several methods share a name but have
+different parameter lists.
+@LINK Oracle: Defining methods @@ https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html @@ docs
+@LINK W3Schools: Java Methods @@ https://www.w3schools.com/java/java_methods.asp @@ site
+@LINK YouTube: search "Methods" tutorials @@ https://www.youtube.com/results?search_query=java+methods+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Write a method @@ Write static int square(int n) and print square(9). @@ 81 @@ public class Main {\n    // write square here\n\n    public static void main(String[] args) {\n        // print square(9)\n    }\n}
+@EX short @@ What return type does a method use when it returns nothing? @@  @@ void @@ Used by main.
+@EX short @@ What does square(6) return? (number)\nstatic int square(int n) { return n * n; } @@  @@ 36 @@ 6 times 6.
+@EX choice @@ Method overloading means: @@ A) Same name, different parameter lists;;B) A method calling itself;;C) A subclass replacing a method;;D) A method with no body @@ a @@ Option C is overriding.
+
+@TOPIC classes @@ Classes and Objects
+@EXPLAIN
+A class is a blueprint; an object is an instance created with new. A constructor initializes
+the object, and this refers to the current object.
+
+    public class Dog {
+        private String name;
+        public Dog(String name) { this.name = name; }
+        public String getName() { return name; }
+    }
+    Dog d = new Dog("Rex");
+
+Fields are usually private and exposed through getters and setters (encapsulation).
+@LINK Oracle: Classes @@ https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html @@ docs
+@LINK W3Schools: Java Classes and Objects @@ https://www.w3schools.com/java/java_classes.asp @@ site
+@LINK YouTube: search "Classes and Objects" tutorials @@ https://www.youtube.com/results?search_query=java+classes+objects+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Make a Dog @@ Give Dog a name, a constructor and speak() so the program prints: Rex says woof @@ Rex says woof @@ class Dog {\n    // field, constructor, speak()\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // create Dog Rex and call speak()\n    }\n}
+@EX short @@ Which keyword creates a new object? @@  @@ new @@ Dog d = ___ Dog();
+@EX short @@ What is the special method called that initializes an object and shares the class name? @@  @@ constructor @@ It has no return type.
+@EX choice @@ Inside a method, what does this refer to? @@ A) The current object;;B) The class file;;C) The parent class;;D) The main method @@ a @@ Useful when a parameter shadows a field.
+
+@TOPIC inheritance @@ Inheritance and Interfaces
+@EXPLAIN
+A subclass inherits fields and methods with extends and can override them. An interface
+declares behavior that classes promise to provide with implements.
+
+    class Animal { void speak() { System.out.println("..."); } }
+    class Cat extends Animal {
+        @Override void speak() { System.out.println("Meow"); }
+    }
+    interface Flyer { void fly(); }
+    class Bird implements Flyer { public void fly() { } }
+
+A class extends one class but may implement many interfaces. Polymorphism lets an Animal
+variable hold a Cat.
+@LINK Oracle: Inheritance @@ https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html @@ docs
+@LINK Oracle: Interfaces @@ https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html @@ docs
+@LINK W3Schools: Java Inheritance @@ https://www.w3schools.com/java/java_inheritance.asp @@ site
+@LINK YouTube: search "Inheritance and Interfaces" tutorials @@ https://www.youtube.com/results?search_query=java+inheritance+interfaces+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@EX short @@ Which keyword makes a class inherit from another class? @@  @@ extends @@ class Cat ___ Animal
+@EX short @@ Which keyword does a class use to adopt an interface? @@  @@ implements @@ class Bird ___ Flyer
+@EX choice @@ How many classes can a Java class directly extend? @@ A) Exactly one at most;;B) Two;;C) Any number;;D) None @@ a @@ Java has single inheritance for classes.
+
+@TOPIC exceptions @@ Exceptions
+@EXPLAIN
+Exceptions signal runtime problems. Handle them with try / catch / finally, or raise one with throw.
+
+    try {
+        int x = Integer.parseInt("abc");
+    } catch (NumberFormatException e) {
+        System.out.println("Not a number");
+    } finally {
+        System.out.println("always runs");
+    }
+
+Checked exceptions (like IOException) must be caught or declared with throws.
+@LINK Oracle: Exceptions @@ https://docs.oracle.com/javase/tutorial/essential/exceptions/ @@ docs
+@LINK W3Schools: Java Exceptions @@ https://www.w3schools.com/java/java_try_catch.asp @@ site
+@LINK YouTube: search "Exceptions" tutorials @@ https://www.youtube.com/results?search_query=java+exceptions+tutorial @@ video
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@CODE Catch a bad number @@ Parse \"abc\" with Integer.parseInt, catch NumberFormatException and print: invalid @@ invalid @@ public class Main {\n    public static void main(String[] args) {\n        // try / catch\n    }\n}
+@EX short @@ Which block always runs, whether or not an exception occurs? @@  @@ finally @@ It comes after catch.
+@EX short @@ Which keyword manually raises an exception? @@  @@ throw @@ Not the same as throws.
+@EX choice @@ Which of these is a checked exception? @@ A) NullPointerException;;B) IOException;;C) ArithmeticException;;D) IndexOutOfBoundsException @@ b @@ The compiler forces you to handle it.
+
+@TOPIC collections @@ Collections
+@EXPLAIN
+The Collections Framework provides flexible data structures: List (ordered, duplicates allowed),
+Set (no duplicates) and Map (key-value pairs).
+
+    import java.util.*;
+    List<Integer> list = new ArrayList<>();
+    list.add(10);
+    list.add(20);
+    Map<String, Integer> ages = new HashMap<>();
+    ages.put("Ada", 36);
+    Set<String> unique = new HashSet<>();
+@LINK Oracle: Collections trail @@ https://docs.oracle.com/javase/tutorial/collections/ @@ docs
+@LINK W3Schools: Java ArrayList @@ https://www.w3schools.com/java/java_arraylist.asp @@ site
+@LINK CodeStepByStep: Java practice problems @@ https://www.codestepbystep.com/problem/list/java @@ practice
+@LINK YouTube: search "Collections" tutorials @@ https://www.youtube.com/results?search_query=java+collections+tutorial @@ video
+@EX short @@ Which interface stores key-value pairs? @@  @@ Map @@ HashMap implements it.
+@EX short @@ What does list.size() return? (number)\nList<Integer> list = new ArrayList<>();\nlist.add(10);\nlist.add(20); @@  @@ 2 @@ Two elements were added.
+@EX choice @@ Which collection rejects duplicate elements? @@ A) ArrayList;;B) HashSet;;C) LinkedList;;D) ArrayDeque @@ b @@ Sets model mathematical sets.
