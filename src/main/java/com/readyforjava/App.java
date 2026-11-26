@@ -1,11 +1,14 @@
 package com.readyforjava;
 
-import com.readyforjava.model.*;
+import java.util.List;
+
+import com.readyforjava.model.Curriculum;
+import com.readyforjava.model.Exercise;
+import com.readyforjava.model.Link;
+import com.readyforjava.model.Topic;
 import com.readyforjava.progress.ProgressTracker;
 import com.readyforjava.ui.Terminal;
 import com.readyforjava.ui.Theme;
-
-import java.util.List;
 
 /** Menu-driven screens: learn, practice, progress, settings. */
 public final class App {
@@ -65,25 +68,35 @@ public final class App {
             if (in == null || in.equalsIgnoreCase("b")) return;
             try {
                 int n = Integer.parseInt(in);
-                if (n >= 1 && n <= topics.size()) showTopic(topics.get(n - 1));
+                if (n >= 1 && n <= topics.size()) openTopic(n - 1);
             } catch (NumberFormatException ignored) { }
         }
     }
 
-    private void showTopic(Topic topic) {
-        t.clear();
-        t.println(t.heading("  " + topic.title()));
-        t.blank();
-        for (String line : topic.explanation()) {
-            if (line.startsWith("    ")) t.code("  " + line);
-            else t.println("  " + line);
+    private void openTopic(int index) {
+        List<Topic> topics = curriculum.topics();
+        while (true) {
+            Topic topic = topics.get(index);
+            t.clear();
+            t.println(t.heading("  " + topic.title() + "  (" + (index + 1) + "/" + topics.size() + ")"));
+            t.blank();
+            for (String line : topic.explanation()) {
+                if (line.startsWith("    ")) t.code("  " + line);
+                else t.println("  " + line);
+            }
+            t.blank();
+            t.println(t.heading("  Keep learning (videos, websites, docs)"));
+            for (Link l : topic.links()) t.println("   • [" + l.type() + "] " + l.title() + "  " + t.link(l.url()));
+            t.blank();
+            String in = t.ask("  n = next topic, p = previous, x = practice, b = back to list > ");
+            if (in == null || in.equalsIgnoreCase("b")) return;
+            switch (in.toLowerCase()) {
+                case "n" -> index = Math.min(index + 1, topics.size() - 1);
+                case "p" -> index = Math.max(index - 1, 0);
+                case "x" -> practice(topic.title(), topic.exercises());
+                default -> { }
+            }
         }
-        t.blank();
-        t.println(t.heading("  Keep learning (external tutorials)"));
-        for (Link l : topic.links()) t.println("   • " + l.title() + "  " + t.link(l.url()));
-        t.blank();
-        String in = t.ask("  p = practice this topic, Enter = back > ");
-        if (in != null && in.equalsIgnoreCase("p")) practice(topic.title(), topic.exercises());
     }
 
     // ---------- Practice ----------
@@ -95,43 +108,48 @@ public final class App {
         practice("All unsolved exercises", todo);
     }
 
-    private void practice(String title, List<Exercise> all) {
-        List<Exercise> todo = all.stream().filter(e -> !progress.isDone(e.id())).toList();
+    private static final int NEXT = 0, BACK = 1, QUIT = 2;
+
+    private void practice(String title, List<Exercise> list) {
         t.clear();
         t.println(t.heading("  Practice: " + title));
-        if (todo.isEmpty()) {
-            t.println(t.good("  Everything here is already solved. Nice work!"));
+        if (list.isEmpty()) {
+            t.println(t.good("  Nothing to practice here."));
             t.pause();
             return;
         }
-        for (int i = 0; i < todo.size(); i++) {
-            if (!ask(todo.get(i), i + 1, todo.size())) return;
+        int i = 0;
+        while (i < list.size()) {
+            int r = ask(list.get(i), i + 1, list.size());
+            if (r == QUIT) return;
+            i = r == BACK ? Math.max(0, i - 1) : i + 1;
         }
         t.blank();
         t.println(t.good("  Set complete! Readiness is now " + progress.percent(curriculum) + "%."));
         t.pause();
     }
 
-    /** Returns false if the learner quit. */
-    private boolean ask(Exercise e, int n, int total) {
+    private int ask(Exercise e, int n, int total) {
         t.blank();
-        t.println(t.heading("  Exercise " + n + "/" + total));
+        t.println(t.heading("  Exercise " + n + "/" + total) + (progress.isDone(e.id()) ? "  " + t.good("(solved)") : ""));
         String[] lines = e.prompt().split("\n");
         t.println("  " + lines[0]);
         for (int i = 1; i < lines.length; i++) t.code("      " + lines[i]);
         for (String option : e.options()) t.println("      " + option);
         while (true) {
-            String a = t.ask("  answer (? hint, s skip, q quit) > ");
-            if (a == null || a.equalsIgnoreCase("q")) return false;
+            String a = t.ask("  answer (? hint, < back, > next, s show answer, q quit) > ");
+            if (a == null || a.equalsIgnoreCase("q")) return QUIT;
+            if (a.equals("<")) return BACK;
+            if (a.equals(">")) return NEXT;
             if (a.equals("?")) { t.println(t.dim("  Hint: " + e.hint())); continue; }
             if (a.equalsIgnoreCase("s")) {
-                t.println(t.dim("  Answer: " + e.answers().get(0) + "  (skipped, not counted)"));
-                return true;
+                t.println(t.dim("  Answer: " + e.answers().get(0) + "  (not counted)"));
+                return NEXT;
             }
             if (e.check(a)) {
                 progress.markDone(e.id());
                 t.println(t.good("  ✔ Correct!"));
-                return true;
+                return NEXT;
             }
             t.println(t.bad("  ✘ Not quite, try again."));
         }

@@ -1,3 +1,4 @@
 package com.readyforjava.model;
 
-public record Link(String title, String url) {}
+/** type is one of: video, site, docs, practice. */
+public record Link(String title, String url, String type) {}
