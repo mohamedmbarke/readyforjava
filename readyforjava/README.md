@@ -1,3 +1,0 @@
-# readyforjava
-
-I want to build a Java documentation and learning platform for students designed to help them achieve at least 70% foundational readiness in the language. Inspired by the interactive approach of CodeStepByStep the curriculum should cover all core Java topics pairing clear explanations with curated links to external online tutorials and hands-on practice exercises. The application will run as a customizable terminal interface: by default it will feature a black background with standard syntax-style text colors while allowing users to change the text and background colors to their preference. Finally the entire project should be written in Java cleanly structured and ready to push directly to GitHub.  The app name is : readyforjava. 
